@@ -7,7 +7,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.google.android.gms.cast.framework.CastContext
 
 @Composable
 internal fun MainScreen() {

@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.fragment.app.FragmentActivity
 import com.example.myapplication.data.CastManager
+import com.example.myapplication.data.CastManager.castSession
+import com.example.myapplication.data.CastManager.sessionManager
 import com.example.myapplication.ui.screen.MainScreen
 import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.google.android.gms.cast.framework.CastContext
@@ -25,5 +27,10 @@ class MainActivity : FragmentActivity() {
                 MainScreen()
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        castSession = sessionManager?.currentCastSession
     }
 }

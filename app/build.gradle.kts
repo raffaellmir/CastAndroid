@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("androidx.mediarouter:mediarouter:1.7.0")
-    implementation("com.google.android.gms:play-services-cast-framework:22.0.0")
+    implementation(libs.androidx.mediarouter)
+    implementation(libs.play.services.cast.framework)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 }
