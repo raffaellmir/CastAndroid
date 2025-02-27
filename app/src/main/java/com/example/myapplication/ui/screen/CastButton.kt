@@ -43,53 +43,10 @@ fun CastButton() {
             }
             CastButtonFactory.setUpMediaRouteButton(context, mediaRouteButton)
 
-            castContext?.let { sessionManager = it.sessionManager }
-            val listener = object : SessionManagerListener<Session> {
-                override fun onSessionEnded(p0: Session, p1: Int) { Log.i(javaClass.simpleName, "on Session starting!") }
-                override fun onSessionEnding(p0: Session) { Log.i(javaClass.simpleName, "on Session ending! with: $p0") }
-                override fun onSessionResumeFailed(p0: Session, p1: Int) { Log.i(javaClass.simpleName, "on Session resume failed!") }
-                override fun onSessionResumed(p0: Session, p1: Boolean) { Log.i(javaClass.simpleName, "on Session resumed!") }
-                override fun onSessionResuming(p0: Session, p1: String) { Log.i(javaClass.simpleName, "on Session resuming!") }
-                override fun onSessionStartFailed(p0: Session, p1: Int) { Log.i(javaClass.simpleName, "on Session start failed! with: $p1") }
-                override fun onSessionStarted(p0: Session, p1: String) {
-                    Log.i(javaClass.simpleName, "on Session started! with: $p1")
-                    castSession?.let { session ->
-                        session.remoteMediaClient.let { media ->
-                            val mediaMetadataBuilder = MediaMetadata.Builder()
-                            mediaMetadataBuilder.putString(MediaMetadata.METADATA_KEY_TITLE,"Media data title")
-                            movieMetaData = mediaMetadataBuilder.build()
-                            if (media != null)
-                                castMovie(media)
-                        }
-                    }
-
-                }
-                override fun onSessionStarting(p0: Session) { Log.i(javaClass.simpleName, "on Session starting!") }
-                override fun onSessionSuspended(p0: Session, p1: Int) { Log.i(javaClass.simpleName, "on Session suspended!") }
-            }
-            sessionManager?.addSessionManagerListener(listener)
-
             mediaRouteButton
         },
         modifier = Modifier.size(48.dp)
     )
-}
-
-private fun castMovie(remoteMediaClient: RemoteMediaClient) {
-    movieMetaData?.let {
-
-        val mediaInfoData = MediaInfo.Builder("https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D").apply {
-            setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
-        }.build()
-
-        val request = MediaLoadRequestData.Builder().apply {
-            setMediaInfo(mediaInfoData)
-            setAutoplay(true)
-        }.build()
-
-        remoteMediaClient.load(request)
-    }
-
 }
 
 @Preview
